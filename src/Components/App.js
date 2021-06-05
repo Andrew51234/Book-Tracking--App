@@ -16,41 +16,10 @@ class BooksApp extends React.Component {
     currentlyReading : [],
     wantToRead : [],
     read : [],
-    query: "",
     showSearchPage: false
   }
- /*  updateShelves = (book, shelf) => {
-    BooksAPI.update(book, shelf).then((books) => {
-      this.setState({
-        AllBooks: books
-      })
-      this.reShelf()
-    })
-  }
-
-  reShelf = () => {BooksAPI.getAll().then((books)=>{
-    let current = []
-    let want = []
-    let done = []
-    books.map((book) => {
-      if (book.shelf === "currentlyReading")
-        current.push(book)
-      if (book.shelf === "wantToRead")
-        want.push(book)
-      if (book.shelf === "read")
-        done.push(book)
-    });
-      this.setState({
-        AllBooks : books,
-        currentlyReading : current,
-        wantToRead : want,
-        read : done
-      })
-    })
-  } */
- 
+  
   componentDidMount() {
-   console.log(this)
     BooksAPI.getAll().then((books)=>{
     let current = []
     let want = []
@@ -77,7 +46,25 @@ class BooksApp extends React.Component {
     return (
       <div className="app">
         {this.state.showSearchPage ? (
-         <Search query = {this.query}/>
+          <div className="search-books">
+            <div className="search-books-bar">
+              <button className="close-search" onClick={() => this.setState({ showSearchPage: false })}>Close</button>
+              <div className="search-books-input-wrapper">
+                {/*
+                  NOTES: The search from BooksAPI is limited to a particular set of search terms.
+                  You can find these search terms here:
+                  https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md
+                  However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
+                  you don't find a specific author or title. Every search is limited by search terms.
+                */}
+                <input type="text" placeholder="Search by title or author"/>
+
+              </div>
+            </div>
+            <div className="search-books-results">
+              <ol className="books-grid"></ol>
+            </div>
+          </div>
         ) : (
           <div className="list-books">
             <div className="list-books-title">
@@ -85,9 +72,9 @@ class BooksApp extends React.Component {
             </div>
             <div className="list-books-content">
               <div>
-                  <Shelf shelfName ="Currently Reading" books={this.state.currentlyReading} update ={this.updateShelves}/>
-                  <Shelf shelfName ="Want to Read" books={this.state.wantToRead} update ={this.updateShelves}/>
-                  <Shelf shelfName ="Read" books={this.state.read} update ={this.updateShelves}/>
+                  <Shelf shelfName ="Currently Reading" books={this.state.currentlyReading}/>
+                  <Shelf shelfName ="Want to Read" books={this.state.wantToRead}/>
+                  <Shelf shelfName ="Read" books={this.state.read}/>
               </div>
             </div>
             <div className="open-search">
