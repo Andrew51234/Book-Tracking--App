@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Book from "./Book"
 class Shelf extends Component {
     render(){
-        const {shelfName, books} = this.props;
+        const {shelfName, books,update} = this.props;
         return(
             <div className="bookshelf">
                   <h2 className="bookshelf-title">{shelfName}</h2>
@@ -11,7 +11,7 @@ class Shelf extends Component {
                         {books.map((book) => {
                             return(
                             <li>
-                                <Book book={book}/>
+                                <Book book={book} updateShelves = {update} />
                             </li>
                             )
                         })}
