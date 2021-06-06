@@ -24,7 +24,6 @@ class BooksApp extends React.Component {
   
  updateShelves = (book,shelf)=>{
     BooksAPI.update(book, shelf).then((books) => {
-      console.log(books)
     BooksAPI.getAll().then((books) => {
     this.setState({
      AllBooks: books
@@ -101,9 +100,12 @@ class BooksApp extends React.Component {
           <Router>
               <Switch>
                  <Route exact path ="/">
-                  <Shelf shelfName ="Currently Reading" books={this.state.currentlyReading} updateShelves ={this.updateShelves}/>
-                  <Shelf shelfName ="Want to Read" books={this.state.wantToRead} updateShelves ={this.updateShelves}/>
-                  <Shelf shelfName ="Read" books={this.state.read} updateShelves ={this.updateShelves}/>
+                   <div className="list-books-title">
+                  <h1>MyReads</h1>
+                 </div>
+                  <Shelf key="Currently Reading" shelfName ="Currently Reading" books={this.state.currentlyReading} updateShelves ={this.updateShelves}/>
+                  <Shelf key="Want to Read" shelfName ="Want to Read" books={this.state.wantToRead} updateShelves ={this.updateShelves}/>
+                  <Shelf key="Read" shelfName ="Read" books={this.state.read} updateShelves ={this.updateShelves}/>
                  </Route>
 
                   <Route path ="/search">

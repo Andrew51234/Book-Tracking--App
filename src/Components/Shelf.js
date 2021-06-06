@@ -5,13 +5,16 @@ class Shelf extends Component {
     render(){
         const {shelfName, books, updateShelves} = this.props;
         return(
+            <div>
+                <div className="list-books">
+          
             <div className="bookshelf">
                   <h2 className="bookshelf-title">{shelfName}</h2>
                   <div className="bookshelf-books">
                     <ol className="books-grid">
                         {books.map((book) => {
                             return(
-                            <li>
+                            <li key={book.id}>
                                 <Book book={book} updateShelves = {updateShelves} />
                             </li>
                             )
@@ -25,6 +28,8 @@ class Shelf extends Component {
               </Link>
             </nav>
           </div>
+                </div>
+                </div>
                 </div>
         )
     }
